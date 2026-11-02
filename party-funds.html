@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Party Funds · The Well of Frogs</title>
+<style>
+
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul, ol { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  ul ul, ul ol { margin: 8px 0 2px; }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+  /* Funds page */
+  .notice { margin-bottom: 34px; }
+
+  #payments td:nth-child(1),
+  #payments td:nth-child(2) { white-space: nowrap; }
+
+
+  .back { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; }
+  .back a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .back a:hover { color: var(--gold); }
+
+  code {
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(154, 114, 40, 0.09);
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 0.86em;
+  }
+
+  .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
+  .related li { margin: 8px 0; }
+
+  td .neg { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <p class="back"><a href="index.html">← Campaign home</a></p>
+    <h1>Party Funds</h1>
+    <p class="lede">What the party holds in common, what it has been paid, and what is still owed. Coins in a character's own purse are not tracked here or anywhere.</p>
+    <p class="meta">
+      <span class="pill">active</span>
+      <span>updated 2026-11-01</span>
+      <span class="sep"></span>
+      <span>6 holdings</span>
+      <span class="sep"></span>
+      <span>10 payments</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <p class="notice">Party funds are held in common and confirmed by Ian. They are not split into individual purses. Fees and prices are logged, but no running total is written into a session record.</p>
+
+      <section id="held">
+        <h2>Held in common</h2>
+        <p>The common purse as it stands after the third session. Three lots came from Mahir in Session 1, one is Lady Danarose's advance, and two came out of the pillar room.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Asset</th><th scope="col" class="num">Amount</th><th scope="col">Where it came from</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Silver</td><td class="num">36 sp</td><td>From Mahir. Confirmed as party funds rather than split, 2026-10-21</td></tr>
+              <tr><td>Electrum</td><td class="num">5 ep</td><td>From Mahir</td></tr>
+              <tr><td>Copper</td><td class="num">8 cp</td><td>From Mahir</td></tr>
+              <tr><td>Gold</td><td class="num">25 gp</td><td>Lady Danarose's advance, Session 2. Held in the party purse, not in any character's</td></tr>
+              <tr><td>Copper</td><td class="num">76 cp</td><td>Recovered from the pillar room, Session 3</td></tr>
+              <tr><td>Silver</td><td class="num">38 sp</td><td>Recovered from the pillar room, Session 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="payments">
+        <h2>Money in and out</h2>
+        <p>Every payment the record keeps, in the order it happened. Negative figures are money leaving the purse.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Date</th><th scope="col">Session</th><th scope="col">Item or source</th><th scope="col" class="num">Value</th><th scope="col">Shares and expenses</th><th scope="col" class="num">Net</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2026-10-20</td><td>Session 1</td><td>Kollaro's payment</td><td class="num">75 gp total</td><td>15 gp each to five PCs</td><td class="num">75 gp</td></tr>
+              <tr><td>2026-10-20</td><td>Session 1</td><td>Captured crossbows and swords</td><td class="num">Unknown</td><td>Traded to the urchins for information</td><td class="num">none</td></tr>
+              <tr><td>2026-10-20</td><td>Session 1</td><td>Lodging at the Broken Wheel</td><td class="num">5 gp total</td><td>1 gp each</td><td class="num neg">-5 gp</td></tr>
+              <tr><td>2026-10-20</td><td>Session 1</td><td>Dio's guide fee</td><td class="num">1 sp</td><td>Paid</td><td class="num neg">-1 sp</td></tr>
+              <tr><td>2026-10-20</td><td>Session 1</td><td>Ed's noise stone</td><td class="num">5 gp</td><td>Paid to Batros</td><td class="num neg">-5 gp</td></tr>
+              <tr><td>2026-10-25</td><td>Session 2</td><td>Lady Danarose's advance</td><td class="num">25 gp</td><td>Held in party funds</td><td class="num">25 gp</td></tr>
+              <tr><td>2026-10-25</td><td>Session 2</td><td>Pablo's fee, to take Dio along</td><td class="num">5 sp</td><td>Paid</td><td class="num neg">-5 sp</td></tr>
+              <tr><td>2026-10-25</td><td>Session 2</td><td>Dio's silence at the ruin</td><td class="num">1 ep</td><td>Paid</td><td class="num neg">-1 ep</td></tr>
+              <tr><td>2026-10-25</td><td>Session 2</td><td>Lotus coal</td><td class="num">3 gp</td><td>Paid to the charcoalers</td><td class="num neg">-3 gp</td></tr>
+              <tr><td>2026-10-25</td><td>Session 2</td><td>Chest of treasure</td><td class="num">Uncounted</td><td>Promised on delivery of Orlando, not taken</td><td class="num">none</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="treasure">
+        <h2>Recovered treasure</h2>
+        <p>Value and disposition kept apart. Amber is value recovered; the scrolls are value realised.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Session</th><th scope="col">Item</th><th scope="col">Value</th><th scope="col">Found where</th><th scope="col">Holder</th><th scope="col">Disposition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Session 1</td><td>Silver pieces</td><td>36 sp</td><td>The literator's pouch</td><td>Party</td><td>Carried</td></tr>
+              <tr><td>Session 1</td><td>Electrum pieces</td><td>5 ep</td><td>The literator's pouch</td><td>Party</td><td>Carried</td></tr>
+              <tr><td>Session 1</td><td>Copper pieces</td><td>8 cp</td><td>The literator's pouch</td><td>Party</td><td>Carried</td></tr>
+              <tr><td>Session 2</td><td>Rough-cut amber gems</td><td>5 × 30 gp = 150 gp</td><td>Hollow altar compartment, the undercroft</td><td>Ed</td><td>Carried</td></tr>
+              <tr><td>Session 2</td><td>Clay tablets</td><td>2 divine scrolls</td><td>Hollow altar compartment, the undercroft</td><td>Ed</td><td>Traded to Manarko for a spellbook in Session 3; the 500 XP is awarded</td></tr>
+              <tr><td>Session 3</td><td>Copper pieces</td><td>76 cp</td><td>The pillar room, the undercroft</td><td>Party</td><td>Carried</td></tr>
+              <tr><td>Session 3</td><td>Silver pieces</td><td>38 sp</td><td>The pillar room, the undercroft</td><td>Party</td><td>Carried</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="outstanding">
+        <h2>Still outstanding</h2>
+        <ul>
+          <li><strong>The chest of treasure.</strong> Promised on delivery of Orlando, uncounted, and not taken, because Orlando has not been delivered.</li>
+          <li><strong>The scrolls.</strong> Traded rather than sold, but a trade counts as a sale for experience. The 500 XP is inside the Session 3 award, not on top of it.</li>
+          <li><strong>Dio's share.</strong> None recorded. As a hireling he takes no share of exploration XP, and whether he sees treasure XP is unsettled.</li>
+        </ul>
+      </section>
+
+      <section id="keeping">
+        <h2>How it is kept</h2>
+        <ul>
+          <li>Recovered value and liquidated value are kept apart.</li>
+          <li>The ledger records who is carrying what.</li>
+          <li>Shares for PCs, retainers, and faction obligations are noted where they exist.</li>
+          <li>Treasure XP is linked to the <a href="experience.html">experience ledger</a> when it is awarded.</li>
+          <li>The payment sequence was confirmed on 2026-10-21: Wakhar offered 5 gp each, the fee rose by 10 gp each once he surrendered, and Kollaro paid 15 gp each.</li>
+        </ul>
+
+        <h3>Related pages</h3>
+        <ul class="related">
+          <li><a href="experience.html">Experience</a>, for the XP the treasure paid.</li>
+          <li><a href="house-rules.html">House Rules</a>, for what the party's gear costs to carry.</li>
+          <li><a href="our-heroes.html">Our Heroes</a>, the five and their hireling.</li>
+          <li><a href="index.html">Campaign home</a>, where each payment was made.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#held">Held in common</a></li>
+        <li><a href="#payments">Money in and out</a></li>
+        <li><a href="#treasure">Recovered treasure</a></li>
+        <li><a href="#outstanding">Still outstanding</a></li>
+        <li><a href="#keeping">How it is kept</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>
