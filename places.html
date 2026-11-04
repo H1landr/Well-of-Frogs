@@ -414,6 +414,69 @@
 
   .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
   .related li { margin: 8px 0; }
+  /* Scene figures */
+
+  figure.scene {
+    margin: 22px 0 26px;
+    padding: 10px;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  figure.scene img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 520px;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+
+  figure.scene figcaption {
+    margin-top: 9px;
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  /* Shared map background */
+  @media screen {
+    body {
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(rgba(244, 236, 218, 0.82), rgba(244, 236, 218, 0.82)),
+        url("arakay-and-the-black-desert.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .notice, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
+      background: rgba(251, 247, 236, 0.70);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+  }
+  @media screen and (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(rgba(20, 17, 12, 0.80), rgba(20, 17, 12, 0.80)),
+        url("arakay-and-the-black-desert.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .notice, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
+      background: rgba(20, 17, 12, 0.55);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+  }
 </style>
 </head>
 <body>
@@ -426,7 +489,7 @@
     <p class="lede">Arakay and the country around it, from the desert roads to the tunnels under the plaza. What the maps name, and what the party has actually walked through.</p>
     <p class="meta">
       <span class="pill">active</span>
-      <span>updated 2026-11-01</span>
+      <span>updated 2026-11-04</span>
       <span class="sep"></span>
       <span>22 places</span>
       <span class="sep"></span>
@@ -443,6 +506,11 @@
       <section id="region">
         <h2>The region</h2>
         <p>The country outside the walls, as the regional map gives it.</p>
+
+        <figure class="scene">
+          <img src="arakay-and-the-black-desert.png" alt="The regional map of Arakay and the Black Desert, with the Jashra Mountains to the south">
+          <figcaption>Arakay and the Black Desert. The regional map: the Black Desert to the west, the Jashra Mountains to the south, and the roads to the Middle Sea, Khosura and Argentum.</figcaption>
+        </figure>
 
         <h3 class="place" id="arakay-region">Arakay and the Black Desert <span class="tag">Region</span></h3>
         <p class="place-meta"><strong>Status:</strong> known on the map.</p>
@@ -506,6 +574,11 @@
         <h2>Streets and houses</h2>
         <p>What the party has actually used: two doors to sleep behind, one tavern, one guild's ground, and the houses of the people they were sent to find.</p>
 
+        <figure class="scene">
+          <img src="city-streets-cats.png" alt="A narrow Arakay alley at night, cats and urchins in the foreground and a pale figure on the stairs">
+          <figcaption>The streets with cats. Scene supplied by the DM; archived 2026-10-26. Visual reference, not a map.</figcaption>
+        </figure>
+
         <h3 class="place" id="broken-wheel">The Broken Wheel <span class="tag">Flophouse</span></h3>
         <p class="place-meta"><strong>Where:</strong> the northeast corner of the Old Quarter.<br><strong>Status:</strong> visited.</p>
         <p>A cheap flophouse owned and managed by Nook the Older, with Wafik the porter and Rewen the laundress under his roof. The party paid 1 gp each for a night's lodging.</p>
@@ -521,6 +594,11 @@
         <h3 class="place" id="urchin-ruin">The Urchin Ruin <span class="tag">Ruin</span></h3>
         <p class="place-meta"><strong>Where:</strong> north of the Piazza dei Rospi.<br><strong>Status:</strong> visited.</p>
         <p>A ruin where four urchins gather, among them Pablo and the boy who became the party's torchbearer. The party brought sesame cakes and traded captured weapons for information. Dio was hired here as a guide.</p>
+
+        <figure class="scene">
+          <img src="city-streets-group.png" alt="A street of shuttered stalls in Arakay, with a woman and child, a stooped figure and a crouching man">
+          <figcaption>The Urchin Ruin, as the DM pictures it. Scene supplied by the DM; archived 2026-10-26. Visual reference, not a map.</figcaption>
+        </figure>
 
         <h3 class="place" id="broken-pillar">The Broken Pillar <span class="tag">Street shrine</span></h3>
         <p class="place-meta"><strong>Status:</strong> visited.</p>
@@ -549,6 +627,11 @@
         <h3 class="place" id="undercroft">The Undercroft <span class="tag">Underground complex</span></h3>
         <p class="place-meta"><strong>Where:</strong> beneath Arakay.<br><strong>Status:</strong> explored in part.</p>
         <p>The tunnels under the city, entered through a trapdoor in the courtyard of a ruined building. The stonework is better the deeper it goes. Lady Danarose says the deeper layers were built by Acheron, the demon empire that once terrorised the land. The party explored a fraction of it in the second session and withdrew into the altar room to rest; the third session went further, to the pillar room, the Archivist's chamber and the room where the Amnesiac sat.</p>
+
+        <figure class="scene">
+          <img src="beneath-the-plaza.png" alt="Vaulted stone arches and columns beneath the plaza">
+          <figcaption>Beneath the plaza. Scene supplied by the DM; archived 2026-10-26. Visual reference, not a map.</figcaption>
+        </figure>
 
         <h3>Related pages</h3>
         <ul class="related">
