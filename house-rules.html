@@ -124,8 +124,8 @@
 
   .layout {
     display: grid;
-    grid-template-columns: minmax(0, 780px) 240px;
-    gap: 64px;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 56px;
     justify-content: space-between;
     padding-top: 40px;
   }
@@ -134,12 +134,61 @@
 
   /* Contents */
 
-  .toc {
+  /* Sequence chart rail */
+
+  .rail {
     align-self: start;
     position: sticky;
-    top: 28px;
-    font-family: var(--sans);
+    top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    max-height: calc(100vh - 44px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule) transparent;
   }
+
+  .toc { font-family: var(--sans); }
+
+  .chart-card { margin: 0; font-family: var(--sans); }
+
+  .chart-card > a {
+    display: block;
+    /* 0.4557 is the chart's width over height, so the whole card fits the viewport */
+    width: clamp(200px, calc((100vh - 400px) * 0.4557), 100%);
+    margin: 0 auto;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+
+  .chart-card > a:hover { border-color: var(--gold); }
+
+  .chart-card img { display: block; width: 100%; height: auto; }
+
+  .chart-card figcaption {
+    margin-top: 9px;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .chart-card figcaption a {
+    color: var(--accent-2);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  .chart-card figcaption a:hover { color: var(--gold); }
+
+  .chart-mobile { display: none; }
 
   .toc h2 {
     margin: 0 0 12px;
@@ -328,8 +377,22 @@
   @media (max-width: 980px) {
     .page { padding: 32px 20px 56px; }
     .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
-    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .rail {
+      position: static;
+      order: -1;
+      max-height: none;
+      overflow: visible;
+      gap: 16px;
+      padding: 0 0 30px;
+    }
     .toc ol { columns: 2; column-gap: 28px; }
+    .chart-card { display: none; }
+    .chart-mobile {
+      display: block;
+      margin: 0;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
     .masthead { max-width: none; }
   }
 
@@ -343,7 +406,7 @@
   @media print {
     body { background: #fff; color: #000; font-size: 11pt; }
     .page { max-width: none; padding: 0; }
-    .toc, .notice { display: none; }
+    .toc, .notice, .chart-card, .chart-mobile { display: none; }
     .table-wrap { box-shadow: none; }
     th, td, tr { break-inside: avoid; }
     a { color: inherit; text-decoration: none; }
@@ -672,21 +735,49 @@
 
     </main>
 
-    <nav class="toc" aria-label="Contents">
-      <h2>Contents</h2>
-      <ol>
-        <li><a href="#register">The register</a></li>
-        <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
-        <li><a href="#exploration">Exploration and equipment</a></li>
-        <li><a href="#classes">Classes and advancement</a></li>
-        <li><a href="#magic-ancestry">Magic and ancestry</a></li>
-        <li><a href="#open-questions">Open rules questions</a></li>
-      </ol>
-      <a class="top" href="#top">Back to top ↑</a>
-    </nav>
+    <aside class="rail">
+
+      <nav class="toc" aria-label="Contents">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#register">The register</a></li>
+          <li><a href="#combat">Combat</a></li>
+          <li><a href="#weapons">Weapons</a></li>
+          <li><a href="#exploration">Exploration and equipment</a></li>
+          <li><a href="#classes">Classes and advancement</a></li>
+          <li><a href="#magic-ancestry">Magic and ancestry</a></li>
+          <li><a href="#open-questions">Open rules questions</a></li>
+        </ol>
+        <a class="top" href="#top">Back to top ↑</a>
+      </nav>
+
+      <figure class="chart-card">
+        <a href="ose-encounter-and-combat-flow.html" target="_blank" rel="noopener" data-chart>
+          <img src="ose-encounter-and-combat-flow.svg" alt="Encounter and combat flow: the five-step encounter sequence, branching on whether the sides fight into the repeating combat round, and both paths ending with one turn passed.">
+        </a>
+        <figcaption>Core OSE sequence of play. <a href="ose-encounter-and-combat-flow.html" target="_blank" rel="noopener" data-chart>Open in its own window</a></figcaption>
+      </figure>
+
+      <p class="chart-mobile"><a href="ose-encounter-and-combat-flow.html" target="_blank" rel="noopener">Encounter and combat flow chart</a>, full size</p>
+
+    </aside>
 
   </div>
 </div>
+<script>
+  document.querySelectorAll('a[data-chart]').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      var w = Math.min(1100, Math.max(560, Math.round(window.innerWidth * 0.62)));
+      var h = Math.min(1150, Math.max(620, Math.round(window.innerHeight * 0.88)));
+      var win = window.open(link.getAttribute('href'), 'ose-sequence-chart',
+        'popup=yes,width=' + w + ',height=' + h + ',resizable=yes,scrollbars=yes');
+      if (win) {
+        event.preventDefault();
+        win.focus();
+      }
+    });
+  });
+</script>
 </body>
 </html>

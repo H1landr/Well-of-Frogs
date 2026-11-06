@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Encounter and Combat Flow · The Well of Frogs</title>
+<style>
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+  }
+
+  .bar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    flex-wrap: wrap;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper-2);
+  }
+
+  .eyebrow {
+    margin: 0 0 2px;
+    font-family: var(--sans);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .tools {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--sans);
+    font-size: 12px;
+  }
+
+  .tools button,
+  .tools a {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .tools button:hover,
+  .tools a:hover { color: var(--accent); border-color: var(--gold); }
+
+  .tools button[hidden] { display: none; }
+
+  .tools .readout {
+    min-width: 44px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-soft);
+  }
+
+  .tools .sep {
+    width: 1px;
+    height: 18px;
+    margin: 0 4px;
+    background: var(--rule);
+  }
+
+  .stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding: 20px;
+  }
+
+  .chart {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--paper-2);
+    box-shadow: 0 20px 44px -30px rgba(40, 25, 10, 0.6);
+  }
+
+  .hint {
+    margin: 0;
+    padding: 8px 18px 10px;
+    border-top: 1px solid var(--rule);
+    background: var(--paper-2);
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+    }
+    .tools button, .tools a { background: var(--paper-2); }
+    .chart { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div>
+    <p class="eyebrow">Old-School Essentials · Sequence of play</p>
+    <h1>Encounter and Combat Flow</h1>
+  </div>
+  <div class="tools">
+    <button type="button" id="zout" title="Zoom out (minus)">−</button>
+    <span class="readout" id="zoom">Fit</span>
+    <button type="button" id="zin" title="Zoom in (plus)">+</button>
+    <span class="sep"></span>
+    <button type="button" id="fit" title="Fit to window width (0)">Fit</button>
+    <button type="button" id="actual" title="Actual size (1)">100%</button>
+    <a href="ose-encounter-and-combat-flow.png" target="_blank" rel="noopener" title="Open the full-resolution image">PNG</a>
+    <span class="sep" id="closeSep"></span>
+    <button type="button" id="close" title="Close this window (Esc)">Close</button>
+  </div>
+</header>
+
+<main class="stage" id="stage">
+  <img class="chart" id="chart" src="ose-encounter-and-combat-flow.svg"
+       alt="Encounter and combat flow: the five-step encounter sequence, branching on whether the sides fight into the repeating combat round, and both paths ending with one turn passed.">
+</main>
+
+<p class="hint">Drag a window edge to resize. Fit keeps the chart on the window width.</p>
+
+<script>
+(function () {
+  var img = document.getElementById('chart');
+  var label = document.getElementById('zoom');
+  var closeBtn = document.getElementById('close');
+  var BASE = 880;
+  var zoom = null;
+
+  function readout() {
+    var shown = zoom || img.getBoundingClientRect().width / BASE;
+    label.textContent = Math.round(shown * 100) + '%';
+  }
+
+  function setFit() {
+    zoom = null;
+    img.style.width = '';
+    img.style.maxWidth = '';
+    readout();
+  }
+
+  function setZoom(z) {
+    zoom = Math.min(4, Math.max(0.25, z));
+    img.style.width = Math.round(BASE * zoom) + 'px';
+    img.style.maxWidth = 'none';
+    readout();
+  }
+
+  function current() {
+    return zoom || img.getBoundingClientRect().width / BASE;
+  }
+
+  document.getElementById('fit').addEventListener('click', setFit);
+  document.getElementById('actual').addEventListener('click', function () { setZoom(1); });
+  document.getElementById('zin').addEventListener('click', function () { setZoom(current() * 1.25); });
+  document.getElementById('zout').addEventListener('click', function () { setZoom(current() / 1.25); });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === '+' || event.key === '=') { setZoom(current() * 1.25); event.preventDefault(); }
+    else if (event.key === '-' || event.key === '_') { setZoom(current() / 1.25); event.preventDefault(); }
+    else if (event.key === '0') { setFit(); }
+    else if (event.key === '1') { setZoom(1); }
+    else if (event.key === 'Escape' && window.opener) { window.close(); }
+  });
+
+  window.addEventListener('resize', readout);
+  img.addEventListener('load', readout);
+  readout();
+
+  if (!window.opener) {
+    closeBtn.hidden = true;
+    document.getElementById('closeSep').hidden = true;
+  }
+  closeBtn.addEventListener('click', function () { window.close(); });
+})();
+</script>
+</body>
+</html>
