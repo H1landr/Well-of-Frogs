@@ -104,6 +104,68 @@
     max-width: 78ch;
   }
 
+  /* Next session */
+
+  .next {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 24px;
+    margin: 34px 0 0;
+    padding: 20px 24px;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    border-radius: 10px;
+    background: rgba(251, 247, 236, 0.72);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    box-shadow: var(--shadow);
+  }
+
+  .next-head { flex: 1 1 22ch; }
+
+  .next-label {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .next-when {
+    margin: 2px 0 0;
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .next-alt {
+    margin: 7px 0 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    color: var(--ink-soft);
+  }
+
+  .next-status {
+    margin: 0;
+    padding: 4px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
   /* Layout */
 
   .split {
@@ -286,7 +348,7 @@
     .page { max-width: none; padding: 0; }
     .notice { display: none; }
     a.card { box-shadow: none; break-inside: avoid; }
-    .about { box-shadow: none; }
+    .about, .next { box-shadow: none; }
   }
 
   @media (prefers-color-scheme: dark) {
@@ -312,7 +374,7 @@
       background-size: cover;
       background-attachment: fixed;
     }
-    a.card, .about {
+    a.card, .about, .next {
       background: rgba(20, 17, 12, 0.55);
       -webkit-backdrop-filter: blur(6px);
       backdrop-filter: blur(6px);
@@ -335,6 +397,15 @@
       <span>24 tables</span>
     </p>
   </header>
+
+  <section class="next" aria-labelledby="next-label">
+    <div class="next-head">
+      <p class="next-label" id="next-label">Next Session</p>
+      <p class="next-when">Saturday 7 November 2026, 9:00 pm Eastern</p>
+      <p class="next-alt">Sunday 8 November 2026, 11:00 am Japan time</p>
+    </div>
+    <p class="next-status">Proposed date</p>
+  </section>
 
   <div class="split">
 
