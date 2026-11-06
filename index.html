@@ -154,15 +154,15 @@
   .next-status {
     margin: 0;
     padding: 4px 12px;
-    border: 1px solid var(--rule);
+    border: 1px solid rgba(63, 91, 67, 0.38);
     border-radius: 999px;
-    background: var(--paper-2);
+    background: rgba(63, 91, 67, 0.09);
     font-family: var(--sans);
     font-size: 11.5px;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: var(--accent-2);
     white-space: nowrap;
   }
 
@@ -379,6 +379,10 @@
       -webkit-backdrop-filter: blur(6px);
       backdrop-filter: blur(6px);
     }
+    .next-status {
+      border-color: rgba(157, 191, 161, 0.34);
+      background: rgba(157, 191, 161, 0.10);
+    }
   }
 </style>
 </head>
@@ -404,7 +408,7 @@
       <p class="next-when">Sunday 8 November 2026, 11:00 am JST</p>
       <p class="next-alt">Saturday 7 November 2026, 9:00 pm EST</p>
     </div>
-    <p class="next-status">Proposed date</p>
+    <p class="next-status">Confirmed</p>
   </section>
 
   <div class="split">
