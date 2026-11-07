@@ -131,10 +131,68 @@
     caption { color: #000; }
     tbody tr:nth-child(even) { background: #f2f2f2; }
   }
+
+  /* PDF link */
+
+  a.doc-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 24px;
+    padding: 15px 18px;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    background: var(--panel);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--sans);
+    transition: border-color 150ms ease;
+  }
+
+  a.doc-link:hover { border-color: var(--gold); }
+
+  a.doc-link:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .doc-link-tag {
+    flex: none;
+    padding: 4px 8px;
+    border: 1px solid rgba(154, 114, 40, 0.55);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    background: rgba(154, 114, 40, 0.10);
+  }
+
+  .doc-link-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .doc-link-body strong { font-size: 1rem; font-weight: 600; }
+
+  .doc-link-body span { font-size: 12.5px; line-height: 1.45; color: var(--ink-soft); }
+
 </style>
 </head>
 <body>
 <main class="page">
+
+  <a class="doc-link" href="feats-of-exploration.pdf" target="_blank" rel="noopener">
+    <span class="doc-link-tag">PDF</span>
+    <span class="doc-link-body">
+      <strong>Feats of Exploration</strong>
+      <span>Jon Britton, 3d6 Down the Line, 2023. Opens in a new window.</span>
+    </span>
+  </a>
 
   <div class="table-wrap">
     <table>

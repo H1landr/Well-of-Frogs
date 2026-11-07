@@ -471,6 +471,54 @@
   .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
   .related li { margin: 8px 0; }
 
+  /* PDF link */
+
+  a.doc-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 16px 0 4px;
+    padding: 14px 16px;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    border-radius: 7px;
+    background: var(--paper-2);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--sans);
+    transition: border-color 150ms ease;
+  }
+
+  a.doc-link:hover { border-color: var(--gold); }
+
+  a.doc-link:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .doc-link-tag {
+    flex: none;
+    padding: 4px 8px;
+    border: 1px solid rgba(154, 114, 40, 0.55);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    background: rgba(154, 114, 40, 0.10);
+  }
+
+  .doc-link-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .doc-link-body strong { font-size: 0.98rem; font-weight: 600; }
+
+  .doc-link-body span { font-size: 12.5px; line-height: 1.45; color: var(--ink-soft); }
+
+
   td .pill { white-space: nowrap; }
   /* Shared map background */
   @media screen {
@@ -484,7 +532,7 @@
       background-size: cover;
       background-attachment: fixed;
     }
-    .notice, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
+    .notice, a.doc-link, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
       background: rgba(251, 247, 236, 0.70);
       -webkit-backdrop-filter: blur(4px);
       backdrop-filter: blur(4px);
@@ -501,7 +549,7 @@
       background-size: cover;
       background-attachment: fixed;
     }
-    .notice, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
+    .notice, a.doc-link, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
       background: rgba(20, 17, 12, 0.55);
       -webkit-backdrop-filter: blur(6px);
       backdrop-filter: blur(6px);
@@ -519,11 +567,9 @@
     <p class="lede">The table's deviations from core OSE, its additions, and the interpretations it plays by. Core procedures are assumed unless a rule appears here.</p>
     <p class="meta">
       <span class="pill">active</span>
-      <span>updated 2026-11-03</span>
+      <span>updated 2026-11-07</span>
       <span class="sep"></span>
-      <span>15 rules</span>
-      <span class="sep"></span>
-      <span>6 open questions</span>
+      <span>16 rules</span>
     </p>
   </header>
 
@@ -535,7 +581,7 @@
 
       <section id="register">
         <h2>The register</h2>
-        <p>Fifteen numbered rules, all currently active. The scope column says where each one bites.</p>
+        <p>Sixteen numbered rules, all currently active. The scope column says where each one bites.</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -544,23 +590,24 @@
             <tbody>
               <tr><td><a href="#hr-01">HR-01</a></td><td>Shields Shall Be Splintered</td><td>Combat and defense</td><td><span class="pill">active</span></td></tr>
               <tr><td><a href="#hr-02">HR-02</a></td><td>Always Wear Your Helmet</td><td>Equipment and combat</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-03">HR-03</a></td><td>Moving and Encumbrance</td><td>Exploration and equipment</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-04">HR-04</a></td><td>Expanded Equipment</td><td>Equipment</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-03">HR-03</a></td><td>Splash and Area Attack Deviation</td><td>Combat</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-04">HR-04</a></td><td>Repairing Destroyed Shields and Helmets</td><td>Equipment and combat</td><td><span class="pill">active</span></td></tr>
               <tr><td><a href="#hr-05">HR-05</a></td><td>Crossbows and Longbows</td><td>Weapons</td><td><span class="pill">active</span></td></tr>
               <tr><td><a href="#hr-06">HR-06</a></td><td>Fighter favored weapon</td><td>Class</td><td><span class="pill">active</span></td></tr>
               <tr><td><a href="#hr-07">HR-07</a></td><td>Cleric sanctified weapons</td><td>Class</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-08">HR-08</a></td><td>Magic-User starting spells</td><td>Class</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-09">HR-09</a></td><td>Thief D6 skills</td><td>Class</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-10">HR-10</a></td><td>Ranger Monster Slayer</td><td>Class</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-11">HR-11</a></td><td>Detect Magic and Read Magic</td><td>Spellcasting</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-12">HR-12</a></td><td>Trollkin increased healing</td><td>Ancestry</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-13">HR-13</a></td><td>Thief hit die and starting HP</td><td>Class and advancement</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-14">HR-14</a></td><td>Weapon Proficiencies</td><td>Combat and weapons</td><td><span class="pill">active</span></td></tr>
-              <tr><td><a href="#hr-15">HR-15</a></td><td>Splash and Area Attack Deviation</td><td>Combat</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-08">HR-08</a></td><td>Ranger Monster Slayer</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-09">HR-09</a></td><td>Weapon Proficiencies</td><td>Combat and weapons</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-10">HR-10</a></td><td>Moving and Encumbrance</td><td>Exploration and equipment</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-11">HR-11</a></td><td>Expanded Equipment</td><td>Equipment</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-12">HR-12</a></td><td>Magic-User starting spells</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-13">HR-13</a></td><td>Thief D6 skills</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-14">HR-14</a></td><td>Thief hit die and starting HP</td><td>Class and advancement</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-15">HR-15</a></td><td>Detect Magic and Read Magic</td><td>Spellcasting</td><td><span class="pill">active</span></td></tr>
+              <tr><td><a href="#hr-16">HR-16</a></td><td>Trollkin increased healing</td><td>Ancestry</td><td><span class="pill">active</span></td></tr>
             </tbody>
           </table>
         </div>
-        <p>Also in use, and not numbered: <strong>Feats of Exploration</strong> supplies the campaign's exploration XP stream, and <strong>magic item XP</strong> is the table's own variation on the optional rule, paying nothing for finding an item and flat XP on its sale.</p>
+        <p>Also in use, and not numbered: <a href="feats-of-exploration.pdf" target="_blank" rel="noopener"><strong>Feats of Exploration</strong></a> (PDF) supplies the campaign's exploration XP stream, and <strong>magic item XP</strong> is the table's own variation on the optional rule, paying nothing for finding an item and flat XP on its sale.</p>
       </section>
 
       <section id="combat">
@@ -568,10 +615,11 @@
 
         <h3 id="hr-01"><span class="rule-id">HR-01</span>Shields Shall Be Splintered</h3>
         <p>A character currently using a shield may destroy it to block all damage from an attack.</p>
+        <p>The 2026 OSE player's book states in each class entry whether the class is martial, semi-martial or non-martial, and that label governs here (DM ruling, 2026-11-07).</p>
         <ul>
-          <li><strong>Martial classes</strong> (fighter, barbarian, ranger and the like) may declare the block <strong>after</strong> the attacker rolls damage.</li>
+          <li><strong>Martial classes</strong> may declare the block <strong>after</strong> the attacker rolls damage.</li>
           <li><strong>Semi-martial classes</strong> with access to shields may declare the block <strong>before</strong> damage is rolled.</li>
-          <li>In either case the shield is completely destroyed and unusable afterward.</li>
+          <li>In either case the shield is completely destroyed and unusable afterward; it can be repaired under <a href="#hr-04">HR-04</a>.</li>
           <li>Normal shields can block only damage from a physical attack.</li>
           <li>Damage from traps, the environment, or poison cannot be blocked by a normal shield.</li>
           <li>Certain magical shields can block magical attacks.</li>
@@ -581,11 +629,12 @@
         <ul>
           <li>Classes that can equip shields can also equip helmets.</li>
           <li>A helmet does <strong>not</strong> provide an AC bonus.</li>
+          <li>A <strong>critical hit</strong> is any natural 20 on an attack roll (DM ruling, 2026-11-07).</li>
           <li>A helmet can absorb the damage from a single critical hit, then is rendered useless.</li>
           <li>Wearing a helmet imposes a <code>-1</code> penalty to Surprise.</li>
         </ul>
 
-        <h3 id="hr-15"><span class="rule-id">HR-15</span>Splash and Area Attack Deviation</h3>
+        <h3 id="hr-03"><span class="rule-id">HR-03</span>Splash and Area Attack Deviation</h3>
         <p>Added at the table on 2026-11-01. When a splash or area attack misses, it deviates from the target.</p>
         <ul>
           <li><strong>Distance:</strong> it deviates 1 ft for every point by which the attack roll missed.</li>
@@ -605,6 +654,13 @@
           </table>
         </div>
         <p>A wide throw takes a second roll: <code>d6</code>, where 1-3 puts it to the left and 4-6 to the right.</p>
+
+        <h3 id="hr-04"><span class="rule-id">HR-04</span>Repairing Destroyed Shields and Helmets</h3>
+        <p>A shield destroyed by <a href="#hr-01">HR-01</a> or a helmet destroyed by <a href="#hr-02">HR-02</a> can be repaired rather than replaced (DM ruling, 2026-11-07). The repair takes one of two forms:</p>
+        <ul>
+          <li><strong>Paid repair:</strong> it costs the same as buying a new one.</li>
+          <li><strong>Armorer:</strong> a character with the Armorer secondary skill and access to materials can repair it with one day of work.</li>
+        </ul>
       </section>
 
       <section id="weapons">
@@ -625,15 +681,15 @@
         <p>If loaded ahead of combat, a crossbow is <strong>not</strong> Slow in the first round.</p>
 
         <h3 id="hr-06"><span class="rule-id">HR-06</span>Fighter: Favored Weapon Type</h3>
-        <p>At 1st level a fighter may choose a weapon type preferred over all others. The fighter receives <code>+1</code> to hit and <code>+1</code> to damage with that weapon type in combat. That is the fighter's free specialisation under <a href="#hr-14">HR-14</a>.</p>
+        <p>At 1st level a fighter may choose a weapon type preferred over all others. The fighter receives <code>+1</code> to hit and <code>+1</code> to damage with that weapon type in combat. That is the fighter's free specialisation under <a href="#hr-09">HR-09</a>.</p>
 
         <h3 id="hr-07"><span class="rule-id">HR-07</span>Cleric: Sanctified Weapons</h3>
         <p>At character creation a cleric chooses three weapon types as the weapons of their god. These weapons may be used without penalty. Other weapons may not be used. The choices should make sense for the deity.</p>
 
-        <h3 id="hr-10"><span class="rule-id">HR-10</span>Ranger: Monster Slayer</h3>
+        <h3 id="hr-08"><span class="rule-id">HR-08</span>Ranger: Monster Slayer</h3>
         <p>A ranger receives <code>+1</code> to attack and damage rolls against giants and monstrous creatures larger than a man.</p>
 
-        <h3 id="hr-14"><span class="rule-id">HR-14</span>Weapon Proficiencies</h3>
+        <h3 id="hr-09"><span class="rule-id">HR-09</span>Weapon Proficiencies</h3>
         <p>An optional OSE rule, adopted on the DM's instruction on 2026-10-27. Proficiencies are declared at 1st level.</p>
         <div class="table-wrap">
           <table>
@@ -654,7 +710,7 @@
       <section id="exploration">
         <h2>Exploration and equipment</h2>
 
-        <h3 id="hr-03"><span class="rule-id">HR-03</span>Moving and Encumbrance, Item-Based</h3>
+        <h3 id="hr-10"><span class="rule-id">HR-10</span>Moving and Encumbrance, Item-Based</h3>
         <p>Use the <strong>item-based encumbrance</strong> system from <em>Carcass Crawler #2</em> (Gavin Norman, pp. 28-29).</p>
         <ul>
           <li>Track significant items rather than coin weight.</li>
@@ -663,17 +719,33 @@
         </ul>
         <p>The full procedure, movement table, and gear weights are on the encumbrance reference page.</p>
 
-        <h3 id="hr-04"><span class="rule-id">HR-04</span>Expanded Equipment</h3>
-        <p>The source points to <em>Carcass Crawler #3</em> for expanded equipment and item-based encumbrance. Exact scope should be confirmed against the supplement.</p>
+        <a class="doc-link" href="item-based-encumbrance.pdf" target="_blank" rel="noopener">
+          <span class="doc-link-tag">PDF</span>
+          <span class="doc-link-body">
+            <strong>Item-Based Encumbrance</strong>
+            <span>Carcass Crawler #2, pages 28 and 29. Opens in a new window.</span>
+          </span>
+        </a>
+
+        <h3 id="hr-11"><span class="rule-id">HR-11</span>Expanded Equipment</h3>
+        <p>The source points to <em>Carcass Crawler #3</em> for expanded equipment and item-based encumbrance. The expanded list combines with the core equipment list and follows the same encumbrance rules as <a href="#hr-10">HR-10</a> (DM ruling, 2026-11-07).</p>
+
+        <a class="doc-link" href="expanded-equipment.pdf" target="_blank" rel="noopener">
+          <span class="doc-link-tag">PDF</span>
+          <span class="doc-link-body">
+            <strong>Expanded Equipment</strong>
+            <span>The full expanded list. Opens in a new window.</span>
+          </span>
+        </a>
       </section>
 
       <section id="classes">
         <h2>Classes and advancement</h2>
 
-        <h3 id="hr-08"><span class="rule-id">HR-08</span>Magic-User: Starting Spells</h3>
+        <h3 id="hr-12"><span class="rule-id">HR-12</span>Magic-User: Starting Spells</h3>
         <p>A newly created magic-user begins with <strong>four random Level 1 spells</strong> in their spellbook, in addition to <strong>Read Magic</strong>.</p>
 
-        <h3 id="hr-09"><span class="rule-id">HR-09</span>Thief: D6 Skills</h3>
+        <h3 id="hr-13"><span class="rule-id">HR-13</span>Thief: D6 Skills</h3>
         <p>Use the <strong>D6 thief skills</strong> from <em>Carcass Crawler #1</em>.</p>
         <ul>
           <li>All skills start at <strong>1-in-6</strong>.</li>
@@ -682,20 +754,20 @@
           <li><strong>Read languages</strong> is available from 1st level and can be improved, per the article. The same article's later section still repeats the standard "from 4th level" wording; this campaign follows the 1st-level version.</li>
         </ul>
 
-        <h3 id="hr-13"><span class="rule-id">HR-13</span>Thief Hit Die and Starting HP</h3>
+        <h3 id="hr-14"><span class="rule-id">HR-14</span>Thief Hit Die and Starting HP</h3>
         <p>A table clarification rather than part of the v1.0 PDF.</p>
         <ul>
           <li><strong>Thief hit die:</strong> <code>d6</code> (the 2026 OSE DM option).</li>
           <li><strong>Starting HP:</strong> maximum hit die result plus the CON modifier.</li>
           <li><strong>Example:</strong> a Thief 1 with CON 8 (<code>-1</code>): <code>6 - 1 = 5</code> HP.</li>
         </ul>
-        <p>The maximum-HP-at-1st-level rule applies to the initial character total. Whether it also applies to newly recruited retainers or replacement characters is unsettled.</p>
+        <p>The maximum-HP-at-1st-level rule applies to PCs only. Replacement characters get it as well; newly recruited retainers do not (DM ruling, 2026-11-07).</p>
       </section>
 
       <section id="magic-ancestry">
         <h2>Magic and ancestry</h2>
 
-        <h3 id="hr-11"><span class="rule-id">HR-11</span>Detect Magic and Read Magic</h3>
+        <h3 id="hr-15"><span class="rule-id">HR-15</span>Detect Magic and Read Magic</h3>
         <p><strong>Detect Magic.</strong> All magic-users can detect magical resonance at will if they can concentrate without distraction and physically touch the subject.</p>
         <ul>
           <li>Only the <strong>existence</strong> of magic is detected.</li>
@@ -704,7 +776,7 @@
         </ul>
         <p><strong>Read Magic.</strong> Read Magic is <strong>not</strong> necessary to decipher scrolls. It <strong>is</strong> necessary to decipher spellbooks.</p>
 
-        <h3 id="hr-12"><span class="rule-id">HR-12</span>Trollkin: Increased Healing</h3>
+        <h3 id="hr-16"><span class="rule-id">HR-16</span>Trollkin: Increased Healing</h3>
         <p>A Draga'Kyr, or Trollkin, heals faster than other ancestries:</p>
         <ul>
           <li>An 8-hour rest heals <code>d3</code> HP.</li>
@@ -712,19 +784,8 @@
         </ul>
       </section>
 
-      <section id="open-questions">
-        <h2>Open rules questions</h2>
-        <p>Six questions the table has not settled. They are marked <code>[?]</code> rather than resolved in the archive.</p>
-        <ul>
-          <li><code>[?]</code> Which classes count as "semi-martial" for Shields Shall Be Splintered? The aptitude table implies a list but does not settle it.</li>
-          <li><code>[?]</code> What counts as a "critical hit" for the helmet rule?</li>
-          <li><code>[?]</code> Are <em>Carcass Crawler</em> #1 and #3 available? The #2 encumbrance pages are transcribed.</li>
-          <li><code>[?]</code> Does the expanded equipment rule change equipment lists, encumbrance, or both?</li>
-          <li><code>[?]</code> Can a destroyed shield or helmet be repaired, or only replaced?</li>
-          <li><code>[?]</code> Does <a href="#hr-13">HR-13</a>'s maximum starting HP apply to retainers and replacement characters?</li>
-        </ul>
-
-        <h3>Related pages</h3>
+      <section id="related">
+        <h2>Related pages</h2>
         <ul class="related">
           <li><a href="experience.html">Experience</a>, which uses the Feats of Exploration stream these rules point at.</li>
           <li><a href="our-heroes.html">Our Heroes</a>, showing the house rules applied to the party.</li>
@@ -746,7 +807,7 @@
           <li><a href="#exploration">Exploration and equipment</a></li>
           <li><a href="#classes">Classes and advancement</a></li>
           <li><a href="#magic-ancestry">Magic and ancestry</a></li>
-          <li><a href="#open-questions">Open rules questions</a></li>
+          <li><a href="#related">Related pages</a></li>
         </ol>
         <a class="top" href="#top">Back to top ↑</a>
       </nav>
