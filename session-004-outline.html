@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 4: The Medallion and the Captive · The Well of Frogs</title>
+<style>
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+  /* Shared map background */
+  @media screen {
+    body {
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(rgba(244, 236, 218, 0.82), rgba(244, 236, 218, 0.82)),
+        url("arakay-and-the-black-desert.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .notice, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
+      background: rgba(251, 247, 236, 0.70);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+  }
+  @media screen and (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(rgba(20, 17, 12, 0.80), rgba(20, 17, 12, 0.80)),
+        url("arakay-and-the-black-desert.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .notice, .table-wrap, .scene-nav a, .pill, .tag, h3.place .tag, h3.person .tag, h3.faction .tag, .rule-id, figure.map, figure.map a, figure.scene {
+      background: rgba(20, 17, 12, 0.55);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <h1>Session 4: The Medallion and the Captive</h1>
+    <p class="lede">A plain outline of what happened, who was there, and what was learned, taken from the raw notes and the second account. What is still open is marked <code>[?]</code> and gathered in <strong>Unresolved</strong> at the end. Room numbers follow the 2026-11-08 undercroft plan.</p>
+    <p class="meta">
+      <span class="pill">draft</span>
+      <span>updated 2026-11-08</span>
+      <span class="sep"></span>
+      <span>7 scenes</span>
+      <span class="sep"></span>
+      <span>11 sections</span>
+      <span class="sep"></span>
+      <span>9 tables</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <section id="player-characters">
+        <h2>Player characters</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">PC</th><th scope="col">Player</th><th scope="col">Ancestry</th><th scope="col">Class and level</th><th scope="col">Notes from play</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Elowyn</td><td>Ian</td><td>Essanin elf, male</td><td>Thief 1</td><td>Scouts the passage; chooses parlay; his critical failure hits Bozz; slays a rat on Anglad; collects the caltrops</td></tr>
+              <tr><td>Anglad the Faceless</td><td>Sebastian</td><td>Sabbatean</td><td>Fighter 1</td><td>Calls the parlay; bluffs; sets his spear; knocks the last man out; loots the dead; takes 8 damage from the rats</td></tr>
+              <tr><td>Bozz the Well Endowed</td><td>Max</td><td>Sabbatean</td><td>Fighter 1</td><td>Holds the stair; splinters his shield; ties the prisoner; crushes rats; holds the junction</td></tr>
+              <tr><td>Dagen</td><td>Jordan</td><td>Human</td><td>Ranger 1</td><td>Absent. He is in no scene, and his absence is not explained or filled.</td></tr>
+              <tr><td>Illiterate Ed</td><td>Alex</td><td>Half-elf</td><td>Magic User 1</td><td>Volunteers for the crawlspace; reads the wand; fires it; sees the translucent things; lures the rats with a ration</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="events">
+        <h2>Events in order</h2>
+
+        <nav class="scene-nav" aria-label="Scenes">
+          <a href="#scene-1">1 Room 7 and the crawlspace</a>
+          <a href="#scene-2">2 The visitors</a>
+          <a href="#scene-3">3 The domed chamber</a>
+          <a href="#scene-4">4 The rough tunnels and the five</a>
+          <a href="#scene-5">5 The stairwell fight</a>
+          <a href="#scene-6">6 The prisoner and the puddles</a>
+          <a href="#scene-7">7 The junction and the rats</a>
+        </nav>
+
+        <h3 id="scene-1">1. Room 7 and the crawlspace</h3>
+        <ul>
+          <li>The party is in room 7 on the 2026-11-08 undercroft plan. The collapse that blocks part of the room is earthquake damage; Anglad, a miner before he was a fighter, works it out.</li>
+          <li>Elowyn notices a crawlspace about 2 ft high where the western wall meets the ceiling.</li>
+          <li>Ed volunteers. A rope is tied to his leg for extraction and he is hoisted into the opening.</li>
+          <li>His infravision shows nothing at first: a cold, damp passage. He crawls about 40 ft in all, and at the edge of his vision is either a wall or another chamber.</li>
+          <li>He scoots back, warns the others that there is a chamber ahead, then goes forward again.</li>
+          <li>While he is in the passage, Anglad sees torchlight from the southern hall. Bozz takes the rope and Anglad keeps watch. Elowyn waits at the blocked door.</li>
+          <li>Anglad and Elowyn hear several people climbing stairs. They speak the local dialect, and Anglad cannot tell whether they are heavily armoured.</li>
+        </ul>
+
+        <h3 id="scene-2">2. The visitors</h3>
+        <ul>
+          <li>The newcomers are surprised to find the party. The first through is a local H'Zhari man with a torch, a leather jacket over an armoured vest, and a short sword. He is shocked to see Anglad and holds up his sword.</li>
+          <li>Anglad asks Elowyn whether to engage or parlay. Elowyn chooses parlay.</li>
+          <li>Anglad calls out that the party is looking for a boy, not trouble.</li>
+          <li>The man points at the party and asks about the dead Amnesiac. Anglad says it was self-defence. The talk turns to candles.</li>
+          <li>They speak in their own dialect. The party catches only hints about the candleman. In the trade tongue they ask what the candleman carried, and name one thing in particular: a leather medallion.</li>
+          <li>The man offers to trade gold for a medallion. Elowyn wants it, and the party says it does not have it.</li>
+          <li>Anglad is unsure, asks the party, then calls out more names to bluff about how many people are in the room.</li>
+          <li>The visitors' morale check, not the party's, is called for, and they back beyond the corner and move away.</li>
+          <li>Ed returns from the crawlspace.</li>
+        </ul>
+
+        <h3 id="scene-3">3. The domed chamber</h3>
+        <ul>
+          <li>Ed checks the candle medallion for magic and finds nothing. He reads the wand instead: it is fading, 1 to 9 charges.</li>
+          <li>Elowyn enters the crawlspace with a rope around his ankle. He senses a slight downward grade, about 20 degrees.</li>
+          <li>Anglad hears no more footsteps.</li>
+          <li>Elowyn reaches the end of the passage and looks out at the top of an enormous circular chamber with a domed ceiling. A narrow stair spirals down to the floor. It does not look like a well. The air is dead and stale. He crawls back.</li>
+          <li>Bozz holds the rope. Anglad watches the path.</li>
+          <li>Elowyn reports what he saw. Anglad suggests Elowyn scout ahead for an ambush. The party rests first, and agrees to come back and look at the domed chamber later.</li>
+          <li>Dio says the people from earlier were looking for the man, and that one of them said, "that's probably the man." Dio also heard them say they were looking for a Chandler.</li>
+          <li>Ed puts the medallion away.</li>
+        </ul>
+
+        <h3 id="scene-4">4. The rough tunnels and the five</h3>
+        <ul>
+          <li>Elowyn scouts the hall. The party follows 20 ft behind.</li>
+          <li>The passage ends at a stairwell down 30 ft. At the bottom the corridor takes a sharp right. Elowyn listens at the corner and hears nothing, and the party follows.</li>
+          <li>An entrance immediately opposite the stairwell leads south. The corridor continues west for another 30 ft. These tunnels are far more roughly hewn than the rooms above.</li>
+          <li>Elowyn sneaks ahead into the southern room. Beyond an archway a 10 ft stairwell leads down and opens to the left into a chamber 10 ft wide and 40 ft long.</li>
+          <li>Five people are waiting in the darkness. The H'Zhari man from the parlay is among them. They rush Elowyn, and he escapes back up the stairs.</li>
+        </ul>
+
+        <h3 id="scene-5">5. The stairwell fight</h3>
+        <ul>
+          <li>Round 1, the party wins initiative. Ed fires the wand for 7 damage, hitting one in the chest and dropping him; the wand can spend two charges in a round. Elowyn throws down caltrops. Bozz blocks the hallway. Anglad sets his spear behind Bozz for the first charge.</li>
+          <li>The enemy morale roll is 7. They hold despite the first casualty.</li>
+          <li>Two of the enemy at the back step on the caltrops; the other two come on cleanly.</li>
+          <li>One charges up the stairs at Bozz and narrowly avoids Anglad's set spear. The attack scrapes off Bozz's armour. Another swings at Bozz and goes wide.</li>
+          <li>Round 2, the party wins initiative. Elowyn's arrow hits one in the face for 1 damage. Bozz goes wide with his mace. Anglad fumbles his spear.</li>
+          <li>At the front, one blow is deflected by Bozz's shield. Another is a natural 20, and Bozz splinters the shield to block it.</li>
+          <li>Round 3, the party loses initiative. The two behind hobble up but are blocked by the two in front. Bozz is attacked twice and both miss.</li>
+          <li>Anglad moves beside Bozz. Ed fires two wand charges for 3 damage each. Elowyn's arrow hits for 4 and finishes a combatant. Bozz's swing sends a body down the stairs. Anglad's spear takes another through the face and head.</li>
+          <li>Round 4, the last combatant fails morale and turns to retreat. Bozz's mace does 3 damage and knocks him back. Anglad uses the heft of his spear to knock him unconscious.</li>
+          <li>Combat ends with one prisoner. The H'Zhari man from the parlay was among the five and is among the dead; the prisoner is a different man.</li>
+        </ul>
+
+        <h3 id="scene-6">6. The prisoner and the puddles</h3>
+        <ul>
+          <li>The room is older than the tunnels that lead into it. There is a door on the east wall, blocked by collapse, a corridor south, and a door after 20 ft, with a corridor beyond it.</li>
+          <li>Elowyn collects his caltrops. Anglad loots the four dead: 11 gp, 20 sp, 38 cp; four leather tunics or suits of armour; two torches; four short swords; four leather medallions stamped with a dagger coming out of a book.</li>
+          <li>Bozz and Anglad tie the prisoner, with a rope to his hand and neck. He is slapped awake.</li>
+          <li>He says Mazarak sent them down to look for a Chandler, because Mazarak believes there is a hoard down here.</li>
+          <li>He points west to the well. He says the literators roped down it, and that he knows little about the Danarose boy and thinks the monster has him.</li>
+          <li>He tells them about the sorceress, the Collector.</li>
+          <li>While he is being questioned, Ed sees translucent things sliding slowly across the floor. They reach the blood from the fight and feed. The notes call them <a href="bestiary.html#the-slimes">slimes</a>.</li>
+          <li>The party decides to let the prisoner lead them to the well.</li>
+        </ul>
+
+        <h3 id="scene-7">7. The junction and the rats</h3>
+        <ul>
+          <li>The tunnel has two corridors, north and south, and a large door at the end.</li>
+          <li>The prisoner says the north tunnel loops around, and that the south tunnel was not explored because it felt wrong: demon worshippers, some kind of temple.</li>
+          <li>Scurrying comes from the cracks in the walls. Seven <a href="bestiary.html#giant-pig-snouted-rats">rats</a>, large and pig-like, come out. They fail to surprise the party.</li>
+          <li>Round 1, the party loses initiative. Two rats charge the prisoner, one hits for 3 damage. Two charge Anglad, one hits for 3 damage and the other criticals for 5. Two charge Bozz and both miss.</li>
+          <li>Elowyn's bow shot critically fails and hits Bozz; the arrow bounces off his armour and does no damage.</li>
+          <li>Ed throws a ration into the fray and leads three rats away.</li>
+          <li>Bozz crushes a rat. Anglad cannot hit any. The prisoner kicks one of the rats.</li>
+          <li>Round 2, the party wins initiative. Anglad still cannot hit. Elowyn slays a rat attached to Anglad. Ed just misses. Bozz kills one of the rats chewing on the prisoner.</li>
+          <li>The rats fail morale and the survivors flee into the cracks in the walls. The fight ends.</li>
+          <li>What the party does with the prisoner and the medallions is unknown until the next session.</li>
+        </ul>
+      </section>
+
+      <section id="money">
+        <h2>Money</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Amount</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Gold pieces</td><td>11 gp</td><td>From the four dead at the stairwell; in the treasure ledger</td></tr>
+              <tr><td>Silver pieces</td><td>20 sp</td><td>From the four dead at the stairwell; in the treasure ledger</td></tr>
+              <tr><td>Copper pieces</td><td>38 cp</td><td>From the four dead at the stairwell; in the treasure ledger</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="items">
+        <h2>Items seen or gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Four leather tunics or suits of armour</td><td>Gained</td><td>From the four dead</td></tr>
+              <tr><td>Four short swords</td><td>Gained</td><td>From the four dead</td></tr>
+              <tr><td>Two torches</td><td>Gained</td><td>From the four dead</td></tr>
+              <tr><td>Four leather medallions stamped with a dagger coming out of a book</td><td>Gained</td><td>From the four dead</td></tr>
+              <tr><td>The candle medallion</td><td>Carried</td><td>The Amnesiac's, already in the party's possession; the visitors asked for it</td></tr>
+              <tr><td>The wand of magic missiles</td><td>Carried</td><td>Ed's; fading, 1 to 9 charges; each charge fires a missile for 1d6+1</td></tr>
+              <tr><td>A ration</td><td>Used</td><td>Ed throws it to draw three rats away</td></tr>
+              <tr><td>Caltrops</td><td>Used and collected</td><td>Elowyn throws them down, then collects them</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="information">
+        <h2>Information gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Claim</th><th scope="col">Source in play</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The visitors want the candleman's leather medallion</td><td>The visitors, in the trade tongue</td><td>Asked of the party</td></tr>
+              <tr><td>The man offers to trade gold for a medallion</td><td>The H'Zhari visitor</td><td>Offered, refused; the second note is unsure</td></tr>
+              <tr><td>The visitors were looking for "the man"</td><td>Dio</td><td>Dio's report</td></tr>
+              <tr><td>The visitors were looking for a Chandler</td><td>Dio</td><td>Dio's report</td></tr>
+              <tr><td>Mazarak sent them to look for a Chandler</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>Mazarak believes there is a hoard below</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>The literators roped down the well, and the prisoner points west to it</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>He knows little of the Danarose boy and thinks the monster has him</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>He tells them about the sorceress, the Collector</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>The north tunnel loops around</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>The south tunnel is unexplored, with demon worshippers and a temple</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>A domed circular chamber with a spiral stair lies west of room 7</td><td>Elowyn</td><td>Seen</td></tr>
+              <tr><td>The wand is fading, 1 to 9; the medallion is not magical</td><td>Ed</td><td>Read</td></tr>
+              <tr><td>The H'Zhari man from the parlay is among the dead; the prisoner is a different man</td><td>The party</td><td>Seen</td></tr>
+              <tr><td>Translucent things slide across the floor and feed on the blood</td><td>Ed</td><td>Seen</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="rumours">
+        <h2>Rumours heard</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Rumour</th><th scope="col">Source</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mazarak sent the five to look for a Chandler, and believes there is a hoard below</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>The literators roped down the well</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>The north tunnel loops around</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>The south tunnel is unexplored, with demon worshippers and a temple</td><td>The prisoner</td><td>Reported under interrogation</td></tr>
+              <tr><td>The Collector is a sorceress</td><td>The prisoner</td><td>Reported; confirmed by Ian, 2026-11-08</td></tr>
+              <tr><td>The visitors were looking for "the man" and a Chandler</td><td>Dio</td><td>Dio's report</td></tr>
+              <tr><td>The H'Zhari visitor offered gold for a medallion</td><td>The visitor</td><td>Offered, refused</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="people">
+        <h2>People</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Who</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The H'Zhari visitor</td><td>The first through in the parlay; a local man with a torch, a leather jacket over an armoured vest, and a short sword</td><td>Dead</td><td>Among the five in the long chamber</td></tr>
+              <tr><td>The stairwell captive</td><td>One of the five; survived the fight</td><td>Captive</td><td>A different man from the visitor; says Mazarak sent them; led the party toward the well</td></tr>
+              <tr><td>Dio</td><td>Hireling</td><td>Alive</td><td>Heard the visitors; with the party at the junction</td></tr>
+              <tr><td>Mazarak</td><td>Literator leader, not present</td><td>Unknown</td><td>Named by the prisoner; sent the five for a Chandler and a hoard</td></tr>
+              <tr><td>The Collector</td><td>Sorceress in the tunnels, not present</td><td>Unknown</td><td>Named by the prisoner</td></tr>
+              <tr><td>The Amnesiac</td><td>Dead in Session 3</td><td>Dead</td><td>The visitors asked about him; his candle medallion is the object of the search</td></tr>
+              <tr><td>The four dead</td><td>The other four of the five</td><td>Dead</td><td>Their coin and gear were taken</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="places">
+        <h2>Places</h2>
+        <p>Room numbers follow the <a href="undercroft-map-2026-11-08.png">2026-11-08 undercroft plan</a>. The four named places at the end of the table are on the map Mnarka gave the party in Session 3; it reflects the undercroft with some differences.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Place</th><th scope="col">What it is</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Room 7</td><td>The room where the session opens; part of it is collapsed by earthquake damage</td><td>The party begins here</td></tr>
+              <tr><td>The crawlspace</td><td>A 2 ft opening where the western wall meets the ceiling; about 40 ft to the domed chamber</td><td>Ed and Elowyn crawl it</td></tr>
+              <tr><td>The domed chamber</td><td>A circular chamber with a domed ceiling and a narrow spiral stair down; not the well</td><td>Seen from the crawlspace; not entered</td></tr>
+              <tr><td>The long chamber</td><td>10 ft wide and 40 ft long, below the stairwell; where the five waited</td><td>The stairwell fight</td></tr>
+              <tr><td>The stairwell</td><td>A 30 ft stairwell down; the corridor takes a sharp right at the bottom</td><td>The fight's bottleneck</td></tr>
+              <tr><td>The junction</td><td>Two corridors north and south, and a large door at the end</td><td>The rat fight; the session ends here</td></tr>
+              <tr><td>The well</td><td>West of the junction; the prisoner points to it; the literators roped down it</td><td>Not reached</td></tr>
+              <tr><td>The undercroft</td><td>The larger complex below the shanty</td><td>The session stays below ground</td></tr>
+              <tr><td>The Temple</td><td>One of four names on Mnarka's map; the lowest part</td><td>Not visited</td></tr>
+              <tr><td>The Warrior's shrine</td><td>Easternmost on Mnarka's map</td><td>Not visited</td></tr>
+              <tr><td>The Hall of Stars</td><td>Westernmost on Mnarka's map</td><td>Not visited</td></tr>
+              <tr><td>The Undead legion</td><td>Beneath the Hall of Stars, or beside the temple; the stain leaves the relation uncertain</td><td>Not visited</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>Experience awarded</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Source</th><th scope="col">XP</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Feats of exploration</td><td>995</td></tr>
+              <tr><td>Treasure</td><td>13</td></tr>
+              <tr><td>Enemies</td><td>90</td></tr>
+              <tr><td>Party award</td><td>1,098</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">PC</th><th scope="col">Base</th><th scope="col">Bonus</th><th scope="col">Total</th><th scope="col">Running total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Elowyn</td><td>220</td><td>+10% (22)</td><td>242</td><td>1,070</td></tr>
+              <tr><td>Anglad</td><td>220</td><td>+10% (22)</td><td>242</td><td>1,070</td></tr>
+              <tr><td>Bozz</td><td>220</td><td>+10% (22)</td><td>242</td><td>1,070</td></tr>
+              <tr><td>Dagen</td><td>220</td><td>+5% (11)</td><td>231</td><td>1,021</td></tr>
+              <tr><td>Ed</td><td>220</td><td>-20% (-44)</td><td>176</td><td>778</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The 1,098 party award is divided at 220 each, per Ian's correction of 2026-11-08. Elowyn, Anglad and Bozz add 10%, Dagen adds 5%, and Ed subtracts 20%. Elowyn remains a Thief 1; 1,200 for the next level. See <a href="experience.html">Experience</a> for the running totals.</p>
+      </section>
+
+      <section id="decisions">
+        <h2>Decisions made by the party</h2>
+        <ul>
+          <li>Chose parlay over engaging the visitors.</li>
+          <li>Denied having the candle medallion.</li>
+          <li>Sent Ed into the crawlspace, then Elowyn.</li>
+          <li>Left the domed chamber's stair unexplored and took the southern route.</li>
+          <li>Tied the prisoner and made him lead them to the well.</li>
+          <li>Chose the well over the room's other ways.</li>
+          <li>Took the four dead's coin and gear.</li>
+          <li>Ended at the junction without choosing north, south or the large door.</li>
+        </ul>
+      </section>
+
+      <section id="unresolved">
+        <h2>Unresolved at the end of the session</h2>
+        <ul>
+          <li><code>[?]</code> What the party does with the prisoner and the medallions.</li>
+          <li><code>[?]</code> Whether the other four dead were the visitor's band.</li>
+          <li><code>[?]</code> Who Mazarak is, and what he wants with a Chandler or the hoard.</li>
+          <li><code>[?]</code> What the Collector is, and whether she is the power below.</li>
+          <li><code>[?]</code> What the four names on Mnarka's map mark: the Temple, the Warrior's shrine, the Hall of Stars and the Undead legion.</li>
+          <li><code>[?]</code> What the domed chamber and its spiral stair lead to.</li>
+          <li><code>[?]</code> What the <a href="bestiary.html#the-slimes">translucent things in the corridor</a> are.</li>
+          <li><code>[?]</code> Where the cracks in the junction walls lead, and whether more <a href="bestiary.html#giant-pig-snouted-rats">rats</a> live behind them.</li>
+          <li><code>[?]</code> What is behind the east door blocked by collapse.</li>
+          <li><code>[?]</code> What the demon worshippers and the temple in the south tunnel are.</li>
+          <li><code>[?]</code> Where the well leads, and whether the literators roped down it.</li>
+          <li><code>[?]</code> Whether the medallions tie the literators to the Chandlers.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#player-characters">Player characters</a></li>
+        <li><a href="#events">Events in order</a></li>
+        <li><a href="#money">Money</a></li>
+        <li><a href="#items">Items seen or gained</a></li>
+        <li><a href="#information">Information gained</a></li>
+        <li><a href="#rumours">Rumours heard</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#places">Places</a></li>
+        <li><a href="#experience">Experience awarded</a></li>
+        <li><a href="#decisions">Decisions made by the party</a></li>
+        <li><a href="#unresolved">Unresolved at the end of the session</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>
