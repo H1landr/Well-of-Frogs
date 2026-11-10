@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Lichyard · The Well of Frogs</title>
+<style>
+  :root {
+    --night: #06080d;
+    --ink: #e9e2d3;
+    --ink-soft: #c3b8a5;
+    --muted: #9a9080;
+    --gold: #d2b982;
+    --rule: rgba(210, 185, 130, 0.34);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--night);
+    background-image:
+      radial-gradient(1100px 640px at 50% 8%, rgba(68, 56, 96, 0.26), transparent 65%),
+      linear-gradient(rgba(5, 7, 12, 0.70), rgba(5, 7, 12, 0.88)),
+      url("the-lichyard-cemetery.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.75;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 46px 26px 84px;
+  }
+
+  .back {
+    margin: 0 0 34px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .back a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  .back a:hover { color: var(--gold); }
+
+  .masthead {
+    text-align: center;
+    padding: 10px 0 0;
+  }
+
+  .kicker {
+    margin: 0 0 18px;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.46em;
+    text-indent: 0.46em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3.1rem, 9vw, 5.4rem);
+    line-height: 0.98;
+    font-weight: 400;
+    letter-spacing: 0.018em;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
+  }
+
+  .subtitle {
+    margin: 20px 0 0;
+    font-size: 1.06rem;
+    font-style: italic;
+    letter-spacing: 0.01em;
+    color: var(--ink-soft);
+  }
+
+  .place {
+    margin: 14px 0 0;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 320px;
+    margin: 32px auto 0;
+    color: var(--gold);
+  }
+
+  .rule::before,
+  .rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .rule span {
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: 0.2em;
+  }
+
+  main { margin-top: 46px; }
+
+  .register {
+    position: relative;
+    padding: 40px 34px 44px;
+    border: 1px solid var(--rule);
+    background: rgba(7, 10, 16, 0.48);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 40px 90px -50px rgba(0, 0, 0, 0.95);
+  }
+
+  .register::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(210, 185, 130, 0.13);
+    pointer-events: none;
+  }
+
+  .register h2 {
+    margin: 0 0 30px;
+    font-family: var(--serif);
+    font-size: 0.98rem;
+    font-weight: 400;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    text-align: center;
+    color: var(--gold);
+  }
+
+  .empty-title {
+    margin: 0 0 16px;
+    font-size: clamp(1.55rem, 4vw, 2.05rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.3;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+
+  .empty-copy {
+    max-width: 47ch;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+  }
+
+  .closing {
+    margin: 34px auto 0;
+    max-width: 44ch;
+    text-align: center;
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  footer {
+    margin-top: 58px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(210, 185, 130, 0.18);
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(210, 185, 130, 0.4);
+    padding-bottom: 2px;
+  }
+
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 560px) {
+    .page { padding: 34px 18px 64px; }
+    .register { padding: 32px 20px 36px; }
+    .register::after { inset: 5px; }
+    .empty-copy { font-size: 0.97rem; }
+    footer { letter-spacing: 0.12em; }
+  }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .page { max-width: none; padding: 0; }
+    .register { background: #fff; border-color: #777; box-shadow: none; }
+    .register::after { border-color: #bbb; }
+    .back, footer { display: none; }
+    h1 { text-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="back"><a href="index.html">← Campaign home</a></p>
+
+  <header class="masthead">
+    <p class="kicker">In Memoriam</p>
+    <h1>The Lichyard</h1>
+    <p class="subtitle">The dead of the party, remembered.</p>
+    <p class="place">The Well of Frogs · Arakay</p>
+    <div class="rule" aria-hidden="true"><span>✦</span></div>
+  </header>
+
+  <main>
+    <section class="register" aria-labelledby="register-title">
+      <h2 id="register-title">The Register</h2>
+      <p class="empty-title">No tenants yet.</p>
+      <p class="empty-copy">No member of the party has fallen. When one does, their name will be set down here, with the session and the place where they fell.</p>
+    </section>
+
+    <p class="closing">The register is kept, and it is empty.</p>
+  </main>
+
+  <footer>
+    <p><a href="index.html">Return to the campaign</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
